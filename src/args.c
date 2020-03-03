@@ -12,14 +12,18 @@ error_t parse_opt(int key, char *arg, struct argp_state *state) {
             arguments->port = atoi(arg);
             break;
         case ARGP_KEY_ARG:
-            if (state->arg_num > 0) {
+            if (state->arg_num > 1) {
                 argp_usage(state);
-                break;
             }
-            arguments->module = arg;
+            else if (state->arg_num == 0) {
+                arguments->module = arg;
+            }
+            else if (state->arg_num == 1) {
+                arguments->function = arg;
+            }
             break;
         case ARGP_KEY_END:
-            if (!state->arg_num) {
+            if (state->arg_num < 2) {
                 argp_usage(state);
             }
             break;

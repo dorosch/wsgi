@@ -11,6 +11,7 @@ struct arguments {
     char *host;
     int port;
     char *module;
+    char *function;
 };
 
 #endif

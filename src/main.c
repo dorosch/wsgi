@@ -4,7 +4,7 @@
 
 static char doc[] = "Just for fun wsgi server";
 
-static char args_doc[] = "python_module";
+static char args_doc[] = "module function";
 
 static struct argp_option options[] = {
     {"host", 'h', "HOST", 0, "Host"},
@@ -14,16 +14,11 @@ static struct argp_option options[] = {
 };
 
 static struct argp argp = {
-    options,
-    parse_opt,
-    args_doc,
-    doc
+    options, parse_opt, args_doc, doc
 };
 
 struct arguments arguments = {
-    "127.0.0.1",
-    9000,
-    "",
+    "127.0.0.1", 9000, "", "",
 };
 
 
