@@ -10,6 +10,7 @@ error_t parse_opt(int, char *, struct argp_state *);
 struct arguments {
     char *host;
     int port;
+    char *module;
 };
 
 #endif
