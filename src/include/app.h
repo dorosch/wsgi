@@ -5,5 +5,6 @@
 #include <Python.h>
 
 void import_module(PyObject **, char *);
+void import_function(PyObject *, PyObject **, char *);
 
 #endif

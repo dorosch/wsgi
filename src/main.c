@@ -9,7 +9,6 @@ static char args_doc[] = "module function";
 static struct argp_option options[] = {
     {"host", 'h', "HOST", 0, "Host"},
     {"port", 'p', "PORT", 0, "Port"},
-    {0, 0, 0, 0, "Module"},
     { 0 }
 };
 
@@ -24,12 +23,16 @@ struct arguments arguments = {
 
 int main (int argc, char **argv) {
     PyObject *module = NULL;
+    PyObject *function = NULL;
 
     Py_Initialize();
 
     argp_parse(&argp, argc, argv, 0, 0, &arguments);
 
     import_module(&module, arguments.module);
+    if (module) {
+        import_function(module, &function, arguments.function);
+    }
 
     Py_Finalize();
 
