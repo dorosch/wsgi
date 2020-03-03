@@ -2,7 +2,6 @@
 #define __ARGS_H__
 
 #include <argp.h>
-#include <error.h>
 #include <stdlib.h>
 
 
