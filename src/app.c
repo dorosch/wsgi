@@ -14,7 +14,11 @@ void import_function(PyObject *module, PyObject **function, char *name) {
     *function = PyObject_GetAttrString(module, name);
 
     if (!PyCallable_Check(*function)) {
-        fprintf(stderr, "Object '%s' is not callable\n", name);
         *function = NULL;
     }
+}
+
+
+PyObject* callback(PyObject *self, PyObject *args) {
+    Py_RETURN_NONE;
 }
