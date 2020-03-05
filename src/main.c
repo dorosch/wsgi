@@ -1,5 +1,6 @@
 #include "app.h"
-#include "args.h"
+#include "arg.h"
+#include "env.h"
 
 
 static char doc[] = "Just for fun wsgi server";
@@ -21,11 +22,11 @@ struct arguments args = {
 };
 
 
-int main (int argc, char **argv) {
+int main (int argc, char **argv, char **env) {
     PyObject *module = NULL;
     PyObject *function = NULL;
     PyObject *arguments = NULL;
-    PyObject *environ = PyDict_New();
+    PyObject *environ = NULL;
     PyObject *start_response = NULL;
 
     Py_Initialize();
@@ -43,6 +44,8 @@ int main (int argc, char **argv) {
         "start_response", callback, METH_VARARGS, ""
     };
     start_response = PyCFunction_New(&callback_define, NULL);
+
+    environ = get_env_dict(env);
 
     arguments = Py_BuildValue("OO", environ, start_response);
 
