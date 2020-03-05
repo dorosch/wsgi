@@ -4,8 +4,8 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
-void import_module(PyObject **, char *);
-void import_function(PyObject *, PyObject **, char *);
+PyObject* import_module(char *);
+PyObject* import_function(PyObject *, char *);
 PyObject* callback(PyObject *, PyObject *);
 
 #endif

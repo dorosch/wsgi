@@ -1,21 +1,29 @@
 #include "app.h"
 
 
-void import_module(PyObject **module, char *name) {
-    PyObject *module_name;
+PyObject* import_module(char *name) {
+    PyObject *module = NULL;
+    PyObject *module_name = NULL;
 
     module_name = PyUnicode_FromString(name);
-    *module = PyImport_Import(module_name);
+    module = PyImport_Import(module_name);
+
     Py_DECREF(module_name);
+
+    return module;
 }
 
 
-void import_function(PyObject *module, PyObject **function, char *name) {
-    *function = PyObject_GetAttrString(module, name);
+PyObject* import_function(PyObject *module, char *name) {
+    PyObject *function = NULL;
 
-    if (!PyCallable_Check(*function)) {
-        *function = NULL;
+    function = PyObject_GetAttrString(module, name);
+
+    if (!PyCallable_Check(function)) {
+        function = NULL;
     }
+
+    return function;
 }
 
 

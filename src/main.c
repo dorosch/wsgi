@@ -34,10 +34,10 @@ int main (int argc, char **argv, char **env) {
 
     argp_parse(&argp, argc, argv, 0, 0, &args);
 
-    import_module(&module, args.module);
-    if (module) {
-        import_function(module, &function, args.function);
-    }
+    module = import_module(args.module);
+    if (!module) goto exit;
+    function = import_function(module, args.function);
+    if (!function) goto exit;
 
     PyMethodDef callback_define = {
         "start_response", callback, METH_VARARGS, ""
@@ -50,6 +50,12 @@ int main (int argc, char **argv, char **env) {
 
     PyObject_CallObject(function, arguments);
 
+exit:
+    Py_XDECREF(module);
+    Py_XDECREF(function);
+    Py_XDECREF(arguments);
+    Py_XDECREF(environ);
+    Py_XDECREF(start_response);
     Py_Finalize();
 
     return 0;
