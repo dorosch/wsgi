@@ -30,8 +30,7 @@ int main (int argc, char **argv, char **env) {
     PyObject *start_response = NULL;
 
     Py_Initialize();
-    PyObject* sys_path = PySys_GetObject((char*) "path");
-    PyList_Append(sys_path, PyUnicode_FromString("."));
+    expand_python_system_paths();
 
     argp_parse(&argp, argc, argv, 0, 0, &args);
 

@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+void expand_python_system_paths();
 PyObject *get_env_dict(char **);
 
 #endif

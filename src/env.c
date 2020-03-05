@@ -1,6 +1,19 @@
 #include "env.h"
 
 
+void expand_python_system_paths() {
+    PyObject *sys_path = NULL;
+    PyObject *current_path = NULL;
+
+    sys_path = PySys_GetObject((char*) "path");
+    current_path = PyUnicode_FromString((char*) ".");
+
+    PyList_Append(sys_path, current_path);
+
+    Py_DECREF(current_path);
+}
+
+
 static char *get_env_name(char *env) {
     char *position = NULL;
     char *variable = NULL;
